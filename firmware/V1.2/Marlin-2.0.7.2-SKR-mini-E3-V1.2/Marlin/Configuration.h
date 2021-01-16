@@ -497,9 +497,23 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  21.73
-    #define DEFAULT_Ki   1.54
-    #define DEFAULT_Kd  76.55
+  /*
+  M303 E0 S200 C5 (5 cycles)
+  Recv: PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+  Recv: #define DEFAULT_Kp 26.19
+  Recv: #define DEFAULT_Ki 2.11
+  Recv: #define DEFAULT_Kd 81.38
+
+  M303 E0 S200 C8 (8 cycles)
+  Recv: PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+  Recv: #define DEFAULT_Kp 26.18
+  Recv: #define DEFAULT_Ki 2.04
+  Recv: #define DEFAULT_Kd 83.95
+
+  M301 P26.18 I2.04 D83.95 */
+    #define DEFAULT_Kp  26.18
+    #define DEFAULT_Ki   2.04
+    #define DEFAULT_Kd  83.95
   #endif
 #endif // PIDTEMP
 
@@ -535,10 +549,16 @@
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
-
-  #define DEFAULT_bedKp 50.71
-  #define DEFAULT_bedKi 9.88
-  #define DEFAULT_bedKd 173.43
+  /*
+  M303 E-1 S60 C8
+  Recv: PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+  Recv: #define DEFAULT_bedKp 41.62
+  Recv: #define DEFAULT_bedKi 7.42
+  Recv: #define DEFAULT_bedKd 155.71
+  M304 P41.62 I7.42 D155.71 */
+  #define DEFAULT_bedKp 41.62
+  #define DEFAULT_bedKi 7.42
+  #define DEFAULT_bedKd 155.71
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -561,7 +581,7 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 200
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
